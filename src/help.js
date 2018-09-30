@@ -1,4 +1,5 @@
 'use strict';
+const colors = require(`colors`);
 const version = require(`./version`);
 const author = require(`./author`);
 const license = require(`./license`);
@@ -10,11 +11,11 @@ module.exports = {
   execute() {
     console.log(`
       Доступные команды:
-      --${this.name} — ${this.description};
-      --${version.name} — ${version.description};
-      --${author.name} — ${author.description}
-      --${license.name} — ${license.description}
-      --${description.name} — ${description.description}
+      ${colors.grey(`--${this.name}`)} — ${this.description.green};
+      ${colors.grey(`--${version.name}`)} — ${version.description.green};
+      ${colors.grey(`--${author.name}`)} — ${author.description.green}
+      ${colors.grey(`--${license.name}`)} — ${license.description.green}
+      ${colors.grey(`--${description.name}`)} — ${description.description.green}
     `);
   }
 };

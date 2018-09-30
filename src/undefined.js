@@ -6,6 +6,6 @@ module.exports = {
   execute() {
     console.error(`
       Неизвестная команда.
-    `);
+    `.red);
   }
 };
