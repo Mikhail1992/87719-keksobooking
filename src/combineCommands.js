@@ -1,32 +1,14 @@
 'use strict';
-const version = require(`./version`);
-const help = require(`./help`);
-const author = require(`./author`);
-const license = require(`./license`);
-const description = require(`./description`);
-const undefinedCommand = require(`./undefined`);
+const commands = require(`./`);
 
 module.exports = function (argument) {
-  switch (argument) {
-    case `--version`:
-      version.execute();
-      break;
-    case `--help`:
-      help.execute();
-      break;
-    case `--author`:
-      author.execute();
-      break;
-    case `--license`:
-      license.execute();
-      break;
-    case `--description`:
-      description.execute();
-      break;
-    default:
-      undefinedCommand.execute();
-      help.execute();
-      process.exit(1);
-      break;
+  const command = commands.find((item) => `--${item.name}` === argument);
+
+  if (command) {
+    command.execute(commands);
+  } else {
+    commands.find((item) => item.name === `undef`).execute();
+    commands.find((item) => item.name === `help`).execute(commands);
+    process.exit(1);
   }
 };

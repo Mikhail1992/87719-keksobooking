@@ -1,20 +1,19 @@
 'use strict';
-const version = require(`./version`);
-const author = require(`./author`);
-const license = require(`./license`);
-const description = require(`./description`);
 
+const findCommand = (commands, command) => {
+  return commands.find((item) => item.name === command);
+}
 module.exports = {
   name: `help`,
   description: `Shows all commands`,
-  execute() {
+  execute(commands) {
     console.log(`
       Доступные команды:
       --${this.name} — ${this.description};
-      --${version.name} — ${version.description};
-      --${author.name} — ${author.description}
-      --${license.name} — ${license.description}
-      --${description.name} — ${description.description}
+      --${findCommand(commands, `version`).name} — ${findCommand(commands, `version`).description};
+      --${findCommand(commands, `author`).name} — ${findCommand(commands, `author`).description}
+      --${findCommand(commands, `license`).name} — ${findCommand(commands, `license`).description}
+      --${findCommand(commands, `description`).name} — ${findCommand(commands, `description`).description}
     `);
   }
 };
