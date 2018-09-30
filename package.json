@@ -1,0 +1,25 @@
+{
+  "name": "87719-keksobooking",
+  "version": "1.0.0",
+  "description": "* Студент: [Михаил Деркач](https://up.htmlacademy.ru/nodejs/2/user/87719). * Наставник: [Никита Ткачук](https://htmlacademy.ru/profile/id450211).",
+  "main": "index.js",
+  "scripts": {
+    "test:lint": "eslint .",
+    "test": "npm run test:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mikhail1992/87719-keksobooking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mikhail1992/87719-keksobooking/issues"
+  },
+  "homepage": "https://github.com/Mikhail1992/87719-keksobooking#readme",
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-htmlacademy": "^0.5.2"
+  }
+}
