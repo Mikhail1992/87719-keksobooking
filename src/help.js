@@ -2,7 +2,8 @@
 
 const findCommand = (commands, command) => {
   return commands.find((item) => item.name === command);
-}
+};
+
 module.exports = {
   name: `help`,
   description: `Shows all commands`,
