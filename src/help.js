@@ -1,7 +1,17 @@
 'use strict';
 
+const colors = require(`colors`);
+
 const findCommand = (commands, command) => {
   return commands.find((item) => item.name === command);
+};
+
+const getCommandName = (commands, command) => {
+  return colors.grey(`--${findCommand(commands, command).name}`);
+};
+
+const getCommandDescr = (commands, command) => {
+  return findCommand(commands, command).description.green;
 };
 
 module.exports = {
@@ -10,11 +20,11 @@ module.exports = {
   execute(commands) {
     console.log(`
       Доступные команды:
-      --${this.name} — ${this.description};
-      --${findCommand(commands, `version`).name} — ${findCommand(commands, `version`).description};
-      --${findCommand(commands, `author`).name} — ${findCommand(commands, `author`).description}
-      --${findCommand(commands, `license`).name} — ${findCommand(commands, `license`).description}
-      --${findCommand(commands, `description`).name} — ${findCommand(commands, `description`).description}
+      ${colors.grey(`--${this.name}`)} — ${this.description.green};
+      ${getCommandName(commands, `version`)} — ${getCommandDescr(commands, `version`)};
+      ${getCommandName(commands, `author`)} — ${getCommandDescr(commands, `author`)}
+      ${getCommandName(commands, `license`)} — ${getCommandDescr(commands, `license`)}
+      ${getCommandName(commands, `description`)} — ${getCommandDescr(commands, `description`)}
     `);
   }
 };
