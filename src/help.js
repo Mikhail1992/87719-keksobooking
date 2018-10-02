@@ -1,21 +1,30 @@
 'use strict';
+
 const colors = require(`colors`);
-const version = require(`./version`);
-const author = require(`./author`);
-const license = require(`./license`);
-const description = require(`./description`);
+
+const findCommand = (commands, command) => {
+  return commands.find((item) => item.name === command);
+};
+
+const getCommandName = (commands, command) => {
+  return colors.grey(`--${findCommand(commands, command).name}`);
+};
+
+const getCommandDescr = (commands, command) => {
+  return findCommand(commands, command).description.green;
+};
 
 module.exports = {
   name: `help`,
   description: `Shows all commands`,
-  execute() {
+  execute(commands) {
     console.log(`
       Доступные команды:
       ${colors.grey(`--${this.name}`)} — ${this.description.green};
-      ${colors.grey(`--${version.name}`)} — ${version.description.green};
-      ${colors.grey(`--${author.name}`)} — ${author.description.green}
-      ${colors.grey(`--${license.name}`)} — ${license.description.green}
-      ${colors.grey(`--${description.name}`)} — ${description.description.green}
+      ${getCommandName(commands, `version`)} — ${getCommandDescr(commands, `version`)};
+      ${getCommandName(commands, `author`)} — ${getCommandDescr(commands, `author`)}
+      ${getCommandName(commands, `license`)} — ${getCommandDescr(commands, `license`)}
+      ${getCommandName(commands, `description`)} — ${getCommandDescr(commands, `description`)}
     `);
   }
 };

@@ -1,11 +1,9 @@
 'use strict';
 
 module.exports = {
-  name: `Undefined command`,
+  name: `undef`,
   description: `Shows error message and all commnads`,
   execute() {
-    console.error(`
-      Неизвестная команда.
-    `.red);
+    console.error(`Undefined comand`.red);
   }
 };
