@@ -1,5 +1,5 @@
 'use strict';
-const combineCommands = require(`./src/combineCommands`);
+const combineCommands = require(`./src/cli/combineCommands`);
 
 const argument = process.argv[2];
 
