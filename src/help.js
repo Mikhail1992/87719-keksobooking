@@ -25,6 +25,7 @@ module.exports = {
       ${getCommandName(commands, `author`)} — ${getCommandDescr(commands, `author`)}
       ${getCommandName(commands, `license`)} — ${getCommandDescr(commands, `license`)}
       ${getCommandName(commands, `description`)} — ${getCommandDescr(commands, `description`)}
+      ${getCommandName(commands, `server`)} — ${getCommandDescr(commands, `server`)}
     `);
   }
 };

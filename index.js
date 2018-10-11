@@ -1,6 +1,6 @@
 'use strict';
 const combineCommands = require(`./src/combineCommands`);
 
-const argument = process.argv[2];
+const params = process.argv.filter((item, index) => index > 1);
 
-combineCommands(argument);
+combineCommands(params);
