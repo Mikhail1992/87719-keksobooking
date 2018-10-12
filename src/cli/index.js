@@ -6,6 +6,7 @@ const license = require(`./license`);
 const description = require(`./description`);
 const undef = require(`./undef`);
 const server = require(`./server`);
+const generate = require(`./generate`);
 
 module.exports = [
   version,
@@ -15,4 +16,5 @@ module.exports = [
   description,
   undef,
   server,
+  generate,
 ];

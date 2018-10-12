@@ -1,5 +1,5 @@
 'use strict';
-const packageInfo = require(`../package.json`);
+const packageInfo = require(`../../package.json`);
 
 const colorizeVersion = (version) => {
   const subVersions = version.split(`.`);

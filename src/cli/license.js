@@ -1,5 +1,5 @@
 'use strict';
-const packageInfo = require(`../package.json`);
+const packageInfo = require(`../../package.json`);
 
 module.exports = {
   name: `license`,
