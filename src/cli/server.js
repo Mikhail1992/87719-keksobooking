@@ -3,7 +3,7 @@ const express = require(`express`);
 const app = express();
 const router = require(`../router`);
 
-const NOT_FOUND_HANDLER = (req, res) => {
+const NOT_FOUND_HANDLER = (err, req, res, _next) => {
   res.status(404).send(`Page was not found`);
 };
 const ERROR_HANDLER = (err, req, res, _next) => {
@@ -11,7 +11,6 @@ const ERROR_HANDLER = (err, req, res, _next) => {
     console.error(err);
     res.status(err.code || 500).send(err.message);
   }
-  _next();
 };
 
 app.use(express.static(`${__dirname}/../../static`));
