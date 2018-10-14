@@ -11,6 +11,7 @@ const ERROR_HANDLER = (err, req, res, _next) => {
     console.error(err);
     res.status(err.code || 500).send(err.message);
   }
+  _next();
 };
 
 app.use(express.static(`${__dirname}/../../static`));
