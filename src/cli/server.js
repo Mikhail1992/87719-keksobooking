@@ -6,6 +6,7 @@ const router = require(`../router`);
 const NOT_FOUND_HANDLER = (err, req, res, _next) => {
   res.status(404).send(`Page was not found`);
 };
+
 const ERROR_HANDLER = (err, req, res, _next) => {
   if (err) {
     console.error(err);
