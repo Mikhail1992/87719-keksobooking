@@ -3,6 +3,9 @@
 const express = require(`express`);
 const router = new express.Router();
 const {genetateNumber} = require(`./utils`);
+const multer = require(`multer`);
+const upload = multer({storage: multer.memoryStorage()});
+const jsonParser = express.json();
 
 const data = require(`./generateEntity`).getData(genetateNumber(1, 10));
 
@@ -24,6 +27,22 @@ router.get(`/:date`, (req, res) => {
   }
 
   res.send(found);
+});
+
+router.post(``, jsonParser, upload.single(`avatar`), (req, res) => {
+  const body = req.body;
+  const avatar = req.file;
+
+  if (!Object.keys(body).length && !avatar) {
+    res.status(400);
+    res.send({error: `Field name "avatar" is required!`});
+  }
+
+  if (avatar) {
+    body.author = {avatar: avatar.originalname};
+  }
+
+  res.send(body);
 });
 
 module.exports = router;

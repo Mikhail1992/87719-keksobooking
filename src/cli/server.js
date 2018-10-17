@@ -3,9 +3,10 @@ const express = require(`express`);
 const app = express();
 const router = require(`../router`);
 
-const NOT_FOUND_HANDLER = (err, req, res, _next) => {
+const NOT_FOUND_HANDLER = (req, res, _next) => {
   res.status(404).send(`Page was not found`);
 };
+
 const ERROR_HANDLER = (err, req, res, _next) => {
   if (err) {
     console.error(err);
