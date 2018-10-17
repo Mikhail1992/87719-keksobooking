@@ -35,7 +35,7 @@ router.post(``, jsonParser, upload.single(`avatar`), (req, res) => {
 
   if (!Object.keys(body).length && !avatar) {
     res.status(400);
-    res.send(`Field name "avatar" is required!`);
+    res.send({error: `Field name "avatar" is required!`});
   }
 
   if (avatar) {
