@@ -9,6 +9,9 @@ const jsonParser = express.json();
 
 const data = require(`./generateEntity`).getData(genetateNumber(1, 10));
 
+const ValidationError = require(`./errors/validation-error`);
+const validate = require(`./validate`);
+
 router.get(``, (req, res) => {
   res.send(data);
 });
@@ -33,16 +36,17 @@ router.post(``, jsonParser, upload.single(`avatar`), (req, res) => {
   const body = req.body;
   const avatar = req.file;
 
-  if (!Object.keys(body).length && !avatar) {
-    res.status(400);
-    res.send({error: `Field name "avatar" is required!`});
-  }
-
   if (avatar) {
     body.author = {avatar: avatar.originalname};
   }
 
-  res.send(body);
+  res.send(validate(body, avatar));
+});
+
+router.use((err, req, res, _next) => {
+  if (err instanceof ValidationError) {
+    res.status(err.code).json(err.errors);
+  }
 });
 
 module.exports = router;
