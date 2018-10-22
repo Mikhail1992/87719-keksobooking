@@ -7,6 +7,7 @@ const validate = (data, avatar) => {
     errors.push(`Field name "avatar" is required!`);
   }
 
+
   if (errors.length > 0) {
     throw new ValidationError(errors);
   }
