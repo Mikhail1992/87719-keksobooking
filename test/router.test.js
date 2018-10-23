@@ -90,7 +90,7 @@ describe(`POST api/offers`, () => {
       expect(`Content-Type`, /json/);
 
 
-    const {error} = response.body;
+    const error = response.body;
     assert.equal(error, `Field name "avatar" is required!`);
   });
 
