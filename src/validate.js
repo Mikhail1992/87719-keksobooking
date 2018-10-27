@@ -1,13 +1,12 @@
 'use strict';
+
 const ValidationError = require(`./errors/validation-error`);
 
-const validate = (data, avatar) => {
+const validate = (data) => {
   const errors = [];
-  if (!Object.keys(data).length && !avatar) {
+  if (!data.avatar) {
     errors.push(`Field name "avatar" is required!`);
   }
-
-
   if (errors.length > 0) {
     throw new ValidationError(errors);
   }
