@@ -55,15 +55,18 @@ describe(`GET /api/offers`, () => {
 describe(`GET /api/offers/:date`, () => {
   it(`get date offer`, async () => {
     const firstOffer = await request(app).
-    get(`/api/offers`).
-    set(`Accept`, `application/json`);
+      get(`/api/offers`).
+      set(`Accept`, `application/json`).
+      expect(200).
+      expect(`Content-Type`, /json/);
+
     const response = await request(app).
       get(`/api/offers/${firstOffer.body.data[0].date}`).
       set(`Accept`, `application/json`).
       expect(200).
       expect(`Content-Type`, /json/);
 
-    const {date} = response.body.data;
+    const {date} = response.body;
     const dateStart = new Date().valueOf() - 3600 * 24 * 7;
     const dateEnd = new Date().valueOf();
     const dateCondition = date > dateStart && date < dateEnd;
@@ -85,11 +88,7 @@ describe(`GET /api/offers/:date`, () => {
 describe(`POST api/offers`, () => {
   it(`send offer as json`, async () => {
 
-    const sent = {
-      author: {
-        avatar: `1.jpg`
-      }
-    };
+    const sent = {avatar: `1.jpg`};
 
     const response = await request(app).
       post(`/api/offers`).
@@ -99,10 +98,10 @@ describe(`POST api/offers`, () => {
       expect(200).
       expect(`Content-Type`, /json/);
 
-
     const offer = response.body;
     assert.deepEqual(offer, sent);
   });
+
   it(`send offer without avatar`, async () => {
 
     const response = await request(app).
@@ -112,7 +111,6 @@ describe(`POST api/offers`, () => {
       set(`Content-Type`, `application/json`).
       expect(400).
       expect(`Content-Type`, /json/);
-
 
     const error = response.body;
     assert.equal(error, `Field name "avatar" is required!`);

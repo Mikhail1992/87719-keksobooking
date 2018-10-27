@@ -88,7 +88,7 @@ router.post(``, jsonParser, upload.single(`avatar`), asyncMiddleware(async (req,
     body.avatar = avatar.originalname;
   }
 
-  const validated = validate(body, avatar);
+  const validated = validate(body);
 
   const result = await router.offersStore.save(validated);
   const insertedId = result.insertedId;

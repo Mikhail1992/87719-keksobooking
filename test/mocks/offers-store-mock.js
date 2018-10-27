@@ -9,7 +9,7 @@ class OfferStoreMock {
   }
 
   async getOffer(date) {
-    return this.data.filter((it) => it.date === date)[0];
+    return this.data.filter((it) => it.date === parseInt(date, 10))[0];
   }
 
   async getAllOffers() {
