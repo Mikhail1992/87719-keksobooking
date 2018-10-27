@@ -9,6 +9,7 @@ const upload = multer({storage: multer.memoryStorage()});
 const jsonParser = express.json();
 const toStream = require(`buffer-to-stream`);
 const MongoError = require(`mongodb`).MongoError;
+const logger = require(`../logger`);
 
 const ValidationError = require(`./errors/validation-error`);
 
@@ -27,6 +28,14 @@ const toPage = async (cursor, skip = 0, limit = PAGE_DEFAULT_LIMIT) => {
     total: await cursor.count()
   };
 };
+
+const ALLOW_CORS = (req, res, next) => {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(`Access-Control-Allow-Headers`, `Origin, X-Requested-With, Content-Type, Accept`);
+  next();
+};
+
+router.use(ALLOW_CORS);
 
 router.get(``, asyncMiddleware(async (req, res) => {
   const skip = parseInt(req.query.skip || 0, 10);
@@ -73,10 +82,10 @@ router.get(`/:date/avatar`, asyncMiddleware(async (req, res) => {
   res.header(`Content-Type`, `image/jpg`);
   res.header(`Content-Length`, result.info.length);
 
-  res.on(`error`, (e) => console.error(e));
+  res.on(`error`, (e) => logger.error(e));
   res.on(`end`, () => res.end());
   const stream = result.stream;
-  stream.on(`error`, (e) => console.error(e));
+  stream.on(`error`, (e) => logger.error(e));
   stream.on(`end`, () => res.end());
   stream.pipe(res);
 }));
@@ -105,7 +114,7 @@ const NOT_FOUND_HANDLER = (req, res) => {
 };
 
 const ERROR_HANDLER = (err, req, res, _next) => {
-  console.error(err);
+  logger.error(err);
   if (err instanceof ValidationError) {
     res.status(err.code).json(err.errors);
     return;
